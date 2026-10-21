@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kein Motor. Kein Steuer. Kein Plan B. – Gordon Bennett 2026</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="media/ui/favicon.svg">
+<link rel="stylesheet" href="assets/vendor/reveal/reset.css">
+<link rel="stylesheet" href="assets/vendor/reveal/reveal.css">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body>
+
+<!-- Einfache Zugangssperre. Kein Sicherheitsmechanismus: die Seite ist statisch und ihr
+     Quelltext öffentlich; das Kennwort steht in assets/js/app.js. -->
+<div class="gate" id="gate" hidden>
+  <form class="gate-box" id="gateForm" autocomplete="off">
+    <img class="gate-logo" alt="Wicki Partners Ballonteam" src="media/ui/wicki-logo.png">
+    <h1 data-i18n="ui.gate.title"></h1>
+    <p data-i18n="ui.gate.sub"></p>
+    <input id="gatePw" type="password" inputmode="numeric" enterkeyhint="go" aria-label="Kennwort" autocomplete="off">
+    <div class="gate-err" id="gateErr" hidden data-i18n="ui.gate.err"></div>
+    <button class="btn primary" type="submit" data-i18n="ui.gate.btn"></button>
+  </form>
+</div>
+
+<!-- Menü: Taste M -->
+<div class="menu" id="menu" hidden>
+  <div class="menu-box">
+    <h2 data-i18n="ui.menu.title"></h2>
+    <div class="opt" data-preset="10"><span class="dot"></span><span data-i18n="ui.menu.preset10"></span></div>
+    <div class="opt" data-preset="20"><span class="dot"></span><span data-i18n="ui.menu.preset20"></span></div>
+    <div class="opt" data-preset="30"><span class="dot"></span><span data-i18n="ui.menu.preset30"></span></div>
+    <div class="opt" data-preset="anhang"><span class="dot"></span><span>Vollfassung + Anhang</span></div>
+    <div class="hint" data-i18n="ui.menu.hint"></div>
+  </div>
+</div>
+
+<div class="foot"><span class="chap" id="footChap"></span><span class="ver" id="footVer"></span></div>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- ===================== 0 EINSTIEG ===================== -->
+<section class="cover" data-chapter="0" data-preset="10 20 30" data-background-image="media/finnland/F059_meer-tief.jpg" data-background-size="cover" data-i18n-notes="s0.1.notes">
+  <div class="shade"></div>
+  <div class="content">
+    <div class="kicker" data-i18n="s0.1.kicker"></div>
+    <h1 data-i18n="s0.1.title"></h1>
+    <p class="sub" data-i18n="s0.1.sub"></p>
+    <p class="by" data-i18n="s0.1.by"></p>
+  </div>
+</section>
+
+<section data-chapter="0" data-preset="10 20 30" data-background-image="media/finnland/F062_meer-schiff.jpg" data-background-size="cover" data-i18n-notes="s0.2.notes">
+  <div class="shade"></div>
+  <div class="caption"><span class="k">Clip · Platzhalter F062</span><span data-i18n="s0.2.caption"></span></div>
+</section>
+
+<section data-chapter="0" data-preset="30" data-i18n-notes="s0.3.notes">
+  <div class="content top"><h2 data-i18n="s0.3.title"></h2></div>
+  <div class="tiles">
+    <div class="tile"><div class="placeholder"><b>1</b>Tuileries 1906</div><div class="lab" data-i18n="s0.3.a"></div></div>
+    <div class="tile"><div class="placeholder"><b>2</b>Helvetia 1908</div><div class="lab" data-i18n="s0.3.b"></div></div>
+    <div class="tile"><img src="media/finnland/F059_meer-tief.jpg" alt=""><div class="lab" data-i18n="s0.3.c"></div></div>
+  </div>
+</section>
+
+<!-- ===================== 1 DER MYTHOS ===================== -->
+<section class="split" data-chapter="1" data-preset="20 30" data-i18n-notes="s1.1.notes">
+  <div class="txt"><div class="kicker">1906 · Der Stifter</div><h2 data-i18n="s1.1.title"></h2><p class="body" data-i18n="s1.1.body"></p><p class="pointe fragment" data-i18n="s1.1.pointe"></p></div>
+  <div class="pic"><div class="placeholder"><b>Bild folgt</b>Porträt James Gordon Bennett Jr.<br>(gemeinfrei, Recherche)</div></div>
+</section>
+
+<section class="split" data-chapter="1" data-preset="20 30" data-i18n-notes="s1.2.notes">
+  <div class="txt"><div class="kicker">30. September 1906</div><h2 data-i18n="s1.2.title"></h2><p class="body" data-i18n="s1.2.body"></p><p class="pointe fragment" data-i18n="s1.2.pointe"></p></div>
+  <div class="pic"><div class="placeholder"><b>Bild folgt</b>Start im Tuileries-Garten 1906<br>(Library of Congress / Wikimedia)</div></div>
+</section>
+
+<section data-chapter="1" data-preset="10 20 30" data-i18n-notes="s1.3.notes">
+  <div class="content top"><div class="kicker">Die Regeln</div><h2 data-i18n="s1.3.title"></h2></div>
+  <div class="rules">
+    <ol>
+      <li class="fragment" data-i18n="s1.3.r1"></li>
+      <li class="fragment" data-i18n="s1.3.r2"></li>
+      <li class="fragment" data-i18n="s1.3.r3"></li>
+      <li class="fragment" data-i18n="s1.3.r4"></li>
+    </ol>
+    <div class="wind">
+      <svg viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+        <rect class="layer" x="20" y="40" width="760" height="150" rx="10"/>
+        <rect class="layer" x="20" y="205" width="760" height="150" rx="10"/>
+        <rect class="layer" x="20" y="370" width="760" height="150" rx="10"/>
+        <text x="40" y="70">3000 m · Wind aus Südwest</text>
+        <text x="40" y="235">1000 m · Wind aus Nordwest</text>
+        <text x="40" y="400">200 m · Wind aus West</text>
+        <g style="color:#6fa8dc"><path class="arrow" d="M120 140 L300 90"/><path class="arrow" d="M420 140 L600 90"/></g>
+        <g style="color:#6fa8dc"><path class="arrow" d="M120 260 L300 310"/><path class="arrow" d="M420 260 L600 310"/></g>
+        <g style="color:#6fa8dc"><path class="arrow" d="M120 455 L300 455"/><path class="arrow" d="M420 455 L600 455"/></g>
+        <g class="balloon">
+          <circle class="env" cx="700" cy="110" r="38"/>
+          <rect class="ball" x="690" y="152" width="20" height="14" rx="3"/>
+          <animateTransform attributeName="transform" type="translate" values="0 0; 0 165; 0 330; 0 165; 0 0" keyTimes="0;0.25;0.5;0.75;1" dur="12s" repeatCount="indefinite"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section data-chapter="1" data-preset="20 30" data-i18n-notes="s1.4.notes">
+  <div class="content top"><div class="kicker">1906 – 2026</div><h2 data-i18n="s1.4.title"></h2></div>
+  <div class="timeline"></div>
+</section>
+
+<section data-chapter="1" data-preset="30" data-i18n-notes="s1.5.notes">
+  <div class="content top"><div class="kicker">Die Grossen</div><h2 data-i18n="s1.5.title"></h2></div>
+  <div class="tiles">
+    <div class="tile"><div class="placeholder"><b>Porträt folgt</b>Demuyter</div><div class="lab" data-i18n="s1.5.a"></div></div>
+    <div class="tile"><div class="placeholder"><b>Porträt folgt</b>Starkbaum</div><div class="lab" data-i18n="s1.5.b"></div></div>
+    <div class="tile"><div class="placeholder"><b>Porträt folgt</b>Eimers</div><div class="lab" data-i18n="s1.5.c"></div></div>
+  </div>
+</section>
+
+<!-- ===================== 2 BALLONNATION SCHWEIZ ===================== -->
+<section class="split" data-chapter="2" data-preset="20 30" data-i18n-notes="s2.1.notes">
+  <div class="txt"><div class="kicker">Seit 1898</div><h2 data-i18n="s2.1.title"></h2><p class="body" data-i18n="s2.1.body"></p><p class="pointe fragment" data-i18n="s2.1.pointe"></p></div>
+  <div class="pic"><div class="placeholder"><b>Bild folgt</b>Spelterini über den Alpen<br>(ETH-Bildarchiv) oder Start Schlieren 1909</div></div>
+</section>
+
+<section data-chapter="2" data-preset="10 20 30" data-i18n-notes="s2.2.notes">
+  <div class="content top"><div class="kicker">1908 – 2026</div><h2 data-i18n="s2.2.title"></h2></div>
+  <div class="wins">
+    <div class="fragment" data-i18n="s2.2.w1"></div>
+    <div class="fragment" data-i18n="s2.2.w2"></div>
+    <div class="fragment" data-i18n="s2.2.w3"></div>
+    <div class="fragment" data-i18n="s2.2.w4"></div>
+    <div class="fragment" data-i18n="s2.2.w5"></div>
+    <div class="fragment" data-i18n="s2.2.w6"></div>
+    <div class="fragment" data-i18n="s2.2.w7"></div>
+    <div class="fragment" data-i18n="s2.2.w8"></div>
+    <div class="fragment" data-i18n="s2.2.w9"></div>
+    <div class="fragment" data-i18n="s2.2.w10"></div>
+    <div class="fragment ours" data-i18n="s2.2.w11"></div>
+  </div>
+</section>
+
+<section class="split" data-chapter="2" data-preset="30" data-i18n-notes="s2.3.notes">
+  <div class="txt"><div class="kicker">Berlin, 11. Oktober 1908</div><h2 data-i18n="s2.3.title"></h2><p class="body" data-i18n="s2.3.body"></p></div>
+  <div class="pic"><div class="placeholder"><b>Bild folgt</b>Start «Helvetia», Berlin 1908</div></div>
+</section>
+
+<section class="split" data-chapter="2" data-preset="30" data-i18n-notes="s2.4.notes">
+  <div class="txt"><div class="kicker">Frieden / Witprächtiger</div><h2 data-i18n="s2.4.title"></h2><p class="body" data-i18n="s2.4.body"></p></div>
+  <div class="pic"><div class="placeholder"><b>Bild folgt</b>Frieden / Witprächtiger<br>(Rechte klären)</div></div>
+</section>
+
+<section data-chapter="2" data-preset="30" data-i18n-notes="s2.5.notes">
+  <div class="content top"><div class="kicker">2021 – 2025</div><h2 data-i18n="s2.5.title"></h2></div>
+  <ul class="list">
+    <li class="fragment" data-i18n="s2.5.l1"></li>
+    <li class="fragment" data-i18n="s2.5.l2"></li>
+    <li class="fragment" data-i18n="s2.5.l3"></li>
+    <li class="fragment" data-i18n="s2.5.l4"></li>
+    <li class="fragment pointe" style="padding-left:0" data-i18n="s2.5.pointe"></li>
+  </ul>
+</section>
+
+<!-- ===================== 3 FINNLAND 2026 ===================== -->
+<section data-chapter="3" data-preset="10 20 30" data-background-image="media/finnland/F051_nacht-startplatz.jpg" data-background-size="cover" data-i18n-notes="s3.1.notes">
+  <div class="shade left"></div>
+  <div class="content narrow"><div class="kicker">28. August 2026</div><h2 data-i18n="s3.1.title"></h2><p class="body" data-i18n="s3.1.body"></p><p class="pointe fragment" data-i18n="s3.1.pointe"></p></div>
+</section>
+
+<section class="mapslide dilemma" data-chapter="3" data-preset="10 20 30" data-i18n-notes="s3.2.notes">
+  <div class="map"></div>
+  <div class="title"><h2 data-i18n="s3.2.title"></h2><p data-i18n="s3.2.body"></p><p class="pointe fragment" style="max-width:20em" data-i18n="s3.2.pointe"></p></div>
+  <div class="legend"><div><i style="background:rgba(224,82,60,.6)"></i><span data-i18n="s3.2.legend.closed"></span></div><div><i style="background:rgba(242,169,59,.6)"></i><span data-i18n="s3.2.legend.gap"></span></div><div><i style="background:#6fa8dc"></i><span data-i18n="s3.2.legend.ours"></span></div></div>
+</section>
+
+<section class="split" data-chapter="3" data-preset="20 30" data-i18n-notes="s3.3.notes">
+  <div class="txt"><div class="kicker">Uni Bern · ETH Zürich · NETBAT</div><h2 data-i18n="s3.3.title"></h2><p class="body" data-i18n="s3.3.body"></p><p class="pointe fragment" data-i18n="s3.3.pointe"></p></div>
+  <div class="pic"><div class="placeholder"><b>Grafik folgt</b>Trajektorienfächer ECMWF-Ensemble<br>(Command Center oder Nachbau aus ERA5)</div></div>
+</section>
+
+<section data-chapter="3" data-preset="20 30" data-background-image="media/finnland/F050_nacht-team.jpg" data-background-size="cover" data-i18n-notes="s3.4.notes">
+  <div class="shade"></div>
+  <div class="caption"><span class="k">Clip Start · Platzhalter F050</span><span data-i18n="s3.4.caption"></span></div>
+</section>
+
+<section class="mapslide" data-chapter="3" data-preset="10 20 30" data-track="finnland" data-secs="45" data-utcoff="2" data-i18n-notes="s3.5.notes">
+  <div class="map"></div>
+  <div class="title"><h2 data-i18n="s3.5.title"></h2><p data-i18n="s3.5.body"></p></div>
+  <div class="hud">
+    <div class="row"><span data-i18n="s3.5.hud.time"></span><b data-hud="time">–</b></div>
+    <div class="row"><span data-i18n="s3.5.hud.alt"></span><b data-hud="alt">–</b></div>
+    <div class="row"><span data-i18n="s3.5.hud.gs"></span><b data-hud="gs">–</b></div>
+    <div class="row"><span data-i18n="s3.5.hud.dist"></span><b class="big" data-hud="dist">–</b></div>
+  </div>
+  <button class="btn primary play" data-i18n="ui.play"></button>
+  <div class="prof"><canvas></canvas></div>
+</section>
+
+<section data-chapter="3" data-preset="10 20 30" data-background-image="media/finnland/F055_abend-meer.jpg" data-background-size="cover" data-i18n-notes="s3.6.notes">
+  <div class="shade"></div>
+  <div class="content"><div class="kicker">Samstag, 29. August</div><h2 data-i18n="s3.6.title"></h2><p class="body" data-i18n="s3.6.body"></p><p class="pointe fragment" data-i18n="s3.6.pointe"></p></div>
+</section>
+
+<section data-chapter="3" data-preset="20 30" data-i18n-notes="s3.7.notes">
+  <div class="content top"><div class="kicker">Die Zahlen</div><h2 data-i18n="s3.7.title"></h2></div>
+  <div class="stats">
+    <div class="stat"><div class="v" data-i18n="s3.7.k1.v"></div><div class="l" data-i18n="s3.7.k1.l"></div></div>
+    <div class="stat"><div class="v" data-i18n="s3.7.k2.v"></div><div class="l" data-i18n="s3.7.k2.l"></div></div>
+    <div class="stat"><div class="v" data-i18n="s3.7.k3.v"></div><div class="l" data-i18n="s3.7.k3.l"></div></div>
+    <div class="stat"><div class="v" data-i18n="s3.7.k4.v"></div><div class="l" data-i18n="s3.7.k4.l"></div></div>
+  </div>
+  <div class="profile-wrap"><canvas data-profile="finnland"></canvas></div>
+</section>
+
+<section data-chapter="3" data-preset="20 30" data-background-image="media/finnland/F062_meer-schiff.jpg" data-background-size="cover" data-i18n-notes="s3.8.notes">
+  <div class="shade"></div>
+  <div class="content"><div class="kicker">Sonntag, 30. August</div><h2 data-i18n="s3.8.title"></h2><p class="body" data-i18n="s3.8.body"></p><p class="pointe fragment" data-i18n="s3.8.pointe"></p></div>
+</section>
+
+<section data-chapter="3" data-preset="10 20 30" data-background-image="media/finnland/F067_landung-flagge.jpg" data-background-size="cover" data-i18n-notes="s3.9.notes">
+  <div class="shade"></div>
+  <div class="content"><div class="kicker">Misinmäki · Loviisa</div><h2 data-i18n="s3.9.title"></h2><p class="body" data-i18n="s3.9.body"></p><p class="pointe fragment" data-i18n="s3.9.pointe"></p></div>
+</section>
+
+<section data-chapter="3" data-preset="10 20 30" data-i18n-notes="s3.10.notes">
+  <div class="content top"><div class="kicker">Rangliste · 69. Coupe Aéronautique Gordon Bennett</div><h2 data-i18n="s3.10.title"></h2></div>
+  <div class="rank">
+    <div class="ours fragment"><span class="n">1</span><span data-i18n="s3.10.r1"></span></div>
+    <div class="fragment"><span class="n">2</span><span data-i18n="s3.10.r2"></span></div>
+    <div class="fragment"><span class="n">3</span><span data-i18n="s3.10.r3"></span></div>
+    <p class="pointe fragment" data-i18n="s3.10.pointe"></p>
+  </div>
+</section>
+
+<section data-chapter="3" data-preset="20 30" data-i18n-notes="s3.11.notes">
+  <div class="content top"><div class="kicker">Medienecho</div><h2 data-i18n="s3.11.title"></h2></div>
+  <div class="quote"><div class="q" data-i18n="s3.11.q"></div><div class="by" data-i18n="s3.11.qby"></div></div>
+</section>
+
+<section class="split" data-chapter="3" data-preset="20 30" data-i18n-notes="s3.12.notes">
+  <div class="txt"><div class="kicker">Das Team</div><h2 data-i18n="s3.12.title"></h2><p class="body" data-i18n="s3.12.body"></p></div>
+  <div class="pic"><div class="placeholder"><b>Bild folgt</b>Command Center · Retrieve-Crew</div></div>
+</section>
+
+<section data-chapter="3" data-preset="20 30" data-background-image="media/finnland/F074_siegerehrung.jpg" data-background-size="cover" data-i18n-notes="s3.13.notes">
+  <div class="shade"></div>
+  <div class="caption"><span class="k">Siegerehrung · Platzhalter F074</span><span data-i18n="s3.13.caption"></span></div>
+</section>
+
+<!-- ===================== 4 SIZILIEN 2026 ===================== -->
+<section data-chapter="4" data-preset="20 30" data-background-image="media/sizilien/S004_startfeld.jpg" data-background-size="cover" data-i18n-notes="s4.1.notes">
+  <div class="shade"></div>
+  <div class="content"><div class="kicker">15. Oktober 2026 · Aeronautica Militare Balloon Cup</div><h2 data-i18n="s4.1.title"></h2><p class="body" data-i18n="s4.1.body"></p><p class="pointe fragment" data-i18n="s4.1.pointe"></p></div>
+</section>
+
+<section class="mapslide" data-chapter="4" data-preset="10 20 30" data-track="sizilien" data-secs="30" data-utcoff="2" data-i18n-notes="s4.2.notes">
+  <div class="map"></div>
+  <div class="title"><h2 data-i18n="s4.2.title"></h2><p data-i18n="s4.2.body"></p></div>
+  <div class="hud">
+    <div class="row"><span data-i18n="s3.5.hud.time"></span><b data-hud="time">–</b></div>
+    <div class="row"><span data-i18n="s3.5.hud.alt"></span><b data-hud="alt">–</b></div>
+    <div class="row"><span data-i18n="s3.5.hud.gs"></span><b data-hud="gs">–</b></div>
+    <div class="row"><span data-i18n="s3.5.hud.dist"></span><b class="big" data-hud="dist">–</b></div>
+  </div>
+  <button class="btn primary play" data-i18n="ui.play"></button>
+  <div class="prof"><canvas></canvas></div>
+</section>
+
+<section data-chapter="4" data-preset="30" data-i18n-notes="s4.3.notes">
+  <div class="content top"><div class="kicker">Zwei Fahrten, zwei Strategien</div><h2 data-i18n="s4.3.title"></h2></div>
+  <div class="stats" style="top:230px">
+    <div class="stat"><div class="v" data-i18n="s4.3.k1.v"></div><div class="l" data-i18n="s4.3.k1.l"></div></div>
+    <div class="stat"><div class="v" data-i18n="s4.3.k2.v"></div><div class="l" data-i18n="s4.3.k2.l"></div></div>
+    <div class="stat"><div class="v" data-i18n="s4.3.k3.v"></div><div class="l" data-i18n="s4.3.k3.l"></div></div>
+    <div class="stat"><div class="v" data-i18n="s4.3.k4.v"></div><div class="l" data-i18n="s4.3.k4.l"></div></div>
+  </div>
+  <div class="profile-wrap two"><canvas data-profile="finnland,sizilien" data-labels="Finnland · HB-QWV,Sizilien · HB-QPJ" data-ymax="4600"></canvas></div>
+</section>
+
+<section data-chapter="4" data-preset="10 20 30" data-background-image="media/sizilien/S019_nacht-meer.jpg" data-background-size="cover" data-i18n-notes="s4.4.notes">
+  <div class="shade"></div>
+  <div class="caption"><span class="k">Platzhalter S019</span><span data-i18n="s4.4.caption"></span></div>
+</section>
+
+<section data-chapter="4" data-preset="10 20 30" data-i18n-notes="s4.5.notes">
+  <div class="content top"><div class="kicker">Rangliste · Gasballone</div><h2 data-i18n="s4.5.title"></h2></div>
+  <div class="rank">
+    <div class="ours fragment"><span class="n">1</span><span data-i18n="s4.5.r1"></span></div>
+    <div class="fragment"><span class="n">2</span><span data-i18n="s4.5.r2"></span></div>
+    <div class="fragment"><span class="n">3</span><span data-i18n="s4.5.r3"></span></div>
+    <p class="pointe fragment" data-i18n="s4.5.pointe"></p>
+  </div>
+</section>
+
+<!-- ===================== 5 SCHLUSS ===================== -->
+<section data-chapter="5" data-preset="10 20 30" data-background-image="media/finnland/F065_kueste.jpg" data-background-size="cover" data-i18n-notes="s5.1.notes">
+  <div class="shade"></div>
+  <div class="content"><h2 data-i18n="s5.1.title"></h2><p class="body" data-i18n="s5.1.body"></p><p class="pointe fragment" data-i18n="s5.1.pointe"></p></div>
+</section>
+
+<section data-chapter="5" data-preset="20 30" data-i18n-notes="s5.2.notes">
+  <div class="content top" style="top:200px"><img src="media/ui/wicki-logo.png" alt="" style="height:70px;margin-bottom:40px"><h2 data-i18n="s5.2.title"></h2><p class="body" style="margin-top:.8em" data-i18n="s5.2.body"></p><p class="kicker" style="margin-top:2em" data-i18n="s5.2.link"></p></div>
+</section>
+
+<section data-chapter="5" data-preset="anhang" data-i18n-notes="s5.3.notes">
+  <div class="content top"><div class="kicker">Anhang</div><h2 data-i18n="s5.3.title"></h2><p class="body" data-i18n="s5.3.body"></p></div>
+</section>
+
+</div>
+</div>
+
+<script src="assets/vendor/reveal/reveal.js"></script>
+<script src="assets/vendor/reveal/plugin/notes/notes.js"></script>
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/js/version.js"></script>
+<script src="i18n/de.js"></script>
+<script src="data/tracks/finnland.js"></script>
+<script src="data/tracks/sizilien.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
