@@ -4,6 +4,15 @@ Jede Vortragsfassung erhält eine Versionsnummer (assets/js/version.js), einen G
 mit derselben Nummer und einen Eintrag hier. Ältere Fassungen bleiben über den Tag
 abrufbar; ein Release-ZIP dient dem Offline-Einsatz.
 
+## 0.1.1 – 22.10.2026 – Eingangsmaske, Texte direkt aus de.json
+
+- Eingangsmaske zeigt Titel, Hinweis und Schaltfläche wieder (Texte wurden erst nach dem
+  Entsperren gesetzt); Platzhalter «Kennwort» im Eingabefeld.
+- Texte werden über http(s) direkt aus `i18n/de.json` geladen: Änderungen auf GitHub sind
+  ohne weiteren Schritt wirksam. Bei fehlerhaftem JSON greift `i18n/de.js`, die Fusszeile
+  zeigt dann eine Warnung.
+- GitHub-Action regeneriert die JS-Wrapper nach jeder Änderung an den JSON-Quellen.
+
 ## 0.1.0 – 21.10.2026 – Gerüst
 
 - Erste lauffähige Fassung: 33 Folien gemäss Storyboard v0.1, Presets 10 / 20 / 30 / Anhang.

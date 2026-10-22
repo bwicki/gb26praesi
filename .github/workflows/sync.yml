@@ -1,0 +1,22 @@
+# Hält i18n/*.js und data/tracks/*.js nach Änderungen an den .json-Quellen aktuell
+# (nötig für den Betrieb ab Datei ohne Server). Läuft bei jedem Push auf main.
+name: JSON → JS synchronisieren
+on:
+  push:
+    branches: [main]
+    paths: ['i18n/*.json', 'data/tracks/*.json', 'tools/sync.py']
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/sync.py
+      - name: Änderungen einchecken
+        run: |
+          git config user.name "sync-bot"
+          git config user.email "sync-bot@users.noreply.github.com"
+          git add i18n/*.js data/tracks/*.js
+          git diff --cached --quiet || git commit -m "sync: JS-Wrapper aus JSON regeneriert"
+          git push

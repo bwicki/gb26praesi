@@ -19,12 +19,32 @@
     setTimeout(() => $('gatePw').focus(), 60);
   }
 
-  /* ---------- Sprache ---------- */
-  const T = window.I18N || {};
+  /* ---------- Sprache ----------
+     Quelle ist i18n/de.json. Über http(s) wird sie direkt geladen (Änderungen auf GitHub
+     wirken ohne weiteren Schritt); ab Datei (file://) oder bei fehlerhaftem JSON greift
+     der Wrapper i18n/de.js (window.I18N), den tools/sync.py erzeugt. */
+  let T = {};
   const t = (k) => (k in T ? T[k] : '⟨' + k + '⟩');
-  function applyI18n() {
+  async function loadI18n() {
+    const fallback = window.I18N || {};
+    if (!/^https?:/.test(location.protocol)) return fallback;
+    try {
+      const r = await fetch('i18n/de.json', { cache: 'no-store' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return await r.json();
+    } catch (e) {
+      console.warn('i18n/de.json nicht verwendbar (' + e.message + ') – verwende i18n/de.js', e);
+      window.I18N_FALLBACK = String(e.message);
+      return fallback;
+    }
+  }
+  function applyText() {
     document.querySelectorAll('[data-i18n]').forEach((el) => { el.innerHTML = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+  }
+  function attachNotes() {
     document.querySelectorAll('[data-i18n-notes]').forEach((el) => {
+      if (el.querySelector(':scope > aside.notes')) return;
       const a = document.createElement('aside'); a.className = 'notes';
       a.textContent = t(el.dataset.i18nNotes); el.appendChild(a);
     });
@@ -53,7 +73,7 @@
   /* ---------- Fusszeile ---------- */
   function initFoot() {
     const v = window.APP_VERSION || { version: '?', date: '' };
-    $('footVer').textContent = 'v' + v.version + ' · ' + v.date + (preset !== '30' ? ' · Preset ' + preset : '');
+    $('footVer').textContent = 'v' + v.version + ' · ' + v.date + (preset !== '30' ? ' · Preset ' + preset : '') + (window.I18N_FALLBACK ? ' · ⚠ de.json fehlerhaft, Texte aus de.js' : '');
   }
   function updateChapter(section) {
     const c = section && section.dataset.chapter;
@@ -260,7 +280,7 @@
 
   /* ---------- Reveal ---------- */
   function startReveal() {
-    applyPreset(); applyI18n(); initFoot();
+    applyPreset(); applyText(); attachNotes(); initFoot();
     const toggleMenu = initMenu();
     document.querySelectorAll('.timeline').forEach(buildTimeline);
     const anims = new Map();
@@ -292,5 +312,5 @@
     window.addEventListener('resize', () => { anims.forEach((a) => a.ready && a.map.invalidateSize()); });
   }
 
-  document.addEventListener('DOMContentLoaded', () => initGate(startReveal));
+  document.addEventListener('DOMContentLoaded', () => { loadI18n().then((j) => { T = j; applyText(); initGate(startReveal); }); });
 })();

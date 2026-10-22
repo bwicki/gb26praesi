@@ -39,9 +39,22 @@ assets/vendor/        reveal.js 5.2.1 (MIT), Leaflet 1.9.4 (BSD-2)
 tools/sync.py         erzeugt die .js-Wrapper aus den .json-Quellen (für Betrieb ab Datei)
 ```
 
-Texte ändern: `i18n/de.json` bearbeiten, danach `python3 tools/sync.py` ausführen (oder
-die Änderung in `i18n/de.js` nachziehen). Englische Fassung: `i18n/en.json` mit gleichen
-Schlüsseln anlegen und in `index.html` einbinden.
+## Texte ändern
+
+1. Auf GitHub die Datei `i18n/de.json` öffnen, Stift-Symbol (Edit) klicken.
+2. Text zwischen den Anführungszeichen ändern; Schlüssel (`"s3.9.title"`) unverändert lassen.
+   `.notes` sind Sprechernotizen (nur im Notizfenster, Taste S).
+3. «Commit changes» – nach rund einer Minute ist die Seite aktuell (Seite neu laden).
+
+Regeln: jeder Eintrag `"schlüssel": "text",` mit Komma am Ende, ausser beim letzten;
+Anführungszeichen im Text als `\"` oder als «»; erlaubt sind `<br>` (Umbruch),
+`<em>…</em>` (Hervorhebung in Amber) und `<small>…</small>`. Bei einem Tippfehler in der
+Struktur fällt die Seite auf die zuletzt gültige Fassung zurück und zeigt in der Fusszeile
+«de.json fehlerhaft» – dann die letzte Änderung prüfen.
+
+Die Datei `i18n/de.js` wird von einer GitHub-Action automatisch nachgeführt (für den
+Betrieb ab Datei ohne Server). Englische Fassung später: `i18n/en.json` mit gleichen
+Schlüsseln.
 
 ## Offline
 
